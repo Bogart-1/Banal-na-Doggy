@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flashcards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #flashcard {
+            width: 300px;
+            height: 200px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        #flashcard-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #next-button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+        }
+
+        #show-answer-button {
+            background-color: #2196F3;
+            color: #fff;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flashcards for Earth and Life Science</h1>
+    <p>by Eco :)</p>
+    <div id="flashcard-container">
+        <div id="flashcard">Click "Show Answer" to reveal the answer.</div>
+        <div id="buttons">
+            <button id="show-answer-button">Show Answer</button>
+            <button id="next-button">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const flashcard = document.getElementById("flashcard");
+        const showAnswerButton = document.getElementById("show-answer-button");
+        const nextButton = document.getElementById("next-button");
+
+        const flashcards = [
+            { question: "It is a set of interconnected components that make a unified whole.", answer: "System" },
+            { question: "A system where there is only an exchange of heat, energy and no matter.", answer: "Closed System" },
+            { question: "The 4 Earth Subsytems", answer: "Biosphere, Atmosphere, Hydrosphere, Litosphere" },
+            { question: "The 3 Major Themes", answer: "Scale, Energy, Cycle" },
+            { question: "It measures microns to kilometers, and miliseconds to millions of years", answer: "Scale" },
+            { question: "The one external source that powers the earth system", answer: "Sun" },
+            { question: "The two internal sources that powers the earth system", answer: "Radioactive Decay and Gravitational Energy" },
+            { question: "It is when materials are continuously recycled in overlapping cycles", answer: "Cycles" },
+            { question: "The three cycles", answer: "Carbon Cycle, Rock Cycle and Hydrolic Cycle" },
+            { question: "It is a subsystem that includes all life forms on earth.", answer: "Biosphere" },
+            { question: "It is a subsystem that is a dynamic mass of water.", answer: "Hydrosphere" },
+            { question: "The amount of liquid water covering earth", answer: "70%" },
+            { question: "The amount of fresh water", answer: "3%" },
+            { question: "The three main layers of earth", answer: "Crust, Mantle, Core" },           
+            { question: "The thinnest layer of earth", answer: "Crust" },
+            { question: "The two types of crusts", answer: "Continental Crust and Oceanic Crust" },
+            { question: "It is the gaseous layer that envelopes the litosphere", answer: "Atmosphere" },
+            { question: "A zone of riggid, brittle rock made by the crust and the upper mantle", answer: "Litosphere" },
+            { question: "Broken pieces of the crust that float on top of the asthenosphere", answer: "Plates" },
+            { question: "The upper part of the mantle below the litosphere", answer: "Asthenophere" },
+            { question: "Major Minerals", answer: "Feldspar, Quartz, Pyroxene, Amphibole, Mica, Olivine" },
+            { question: "A mineral that has light cream to salmon pink color, used for ceramics and glass making", answer: "Feldspar" },
+            { question: "A mineral that is usually white or colorless, used for manufacturing radios/radars", answer: "Quartz" },
+            { question: "A mineral that is commonly found in meteorites, their color is green or black", answer: "Pyroxene" },
+            { question: "A minerl that is also green or black in color, but is used for asbestos industries", answer: "Amphibole" },
+            { question: "A mineral that is found in igneous rocks and metamorphic rocks, used in electronic instrumets.", answer: "Mica" },
+            { question: "A mineral that has greenish color, used for jewelries", answer: "Olivine" },
+            { question: "The largest layer on earth", answer: "Mantle" },
+            { question: "Caused by very hot material at the deepest part of the mantle", answer: "Convection Currents" },
+            { question: "A greek word meaning stone.", answer: "Lithos" },
+            { question: "A greek word meaning globe or ball", answer: "Sphaira" },
+            { question: "The three types of plate boundaries", answer: "Divergent Boundary, Convergent Boundary, Transform Boundary" },
+            { question: "A type of boundary where two plates move apart", answer: "Divergent Boundary" },
+            { question: "A type of boundary where two plates collide or come together", answer: "Convergent Boundary" },
+            { question: "A type of boundary where two plates slide past one another", answer: "Transform Boundary" },
+            { question: "The three types of faults", answer: "Normal Fault, Reverse Fault, Strike-slip Fault" },
+            { question: "A type of fault where the rocks move down", answer: "Normal Fault" },
+            { question: "A type of fault where the rocks move up", answer: "Reverse Fault" },
+            { question: "A type of fault where the rocks slide past one another", answer: "Strike-slip Fault" },
+            { question: "It is when a plate goes down another", answer: "Subduction" },
+            { question: "An opening in the earth that erupts ash, gases, and lava", answer: "Volcano" },
+            { question: "Three types of volcanoes", answer: "Shield Volcano, Cinder Cone Volcano, Composite Volcano" },
+            { question: "A type of volcano that has layers of hardened lava", answer: "Shield Volcano" },
+            { question: "A type of volcano that has ash particles, dust and ash", answer: "Cinder Cone Volcano" },
+            { question: "A type of volcano that has alternating layers of lava and rock particles", answer: "Composite Volcano" },
+            { question: "It is where an earthquake starts", answer: "Focus" },
+            { question: "It is above the focus", answer: "Epicenter" },
+            { question: "It measures earthquake waves", answer: "Seismograph" },
+            { question: "Three types of waves", answer: "P-Wave, S-Wave, L-Wave" },
+            { question: "It is the fastest wave. It moves back and forth.", answer: "P-Wave" },
+            { question: "It is a slower wave. It moves up and down.", answer: "S-Wave" },
+            { question: "It is the most dangerous wave. It moves back and forth and side to side", answer: "L-Wave" }
+
+        ];
+
+        let currentFlashcardIndex = 0;
+        let showAnswer = false;
+
+        function displayFlashcard() {
+            if (showAnswer) {
+                flashcard.textContent = flashcards[currentFlashcardIndex].answer;
+            } else {
+                flashcard.textContent = flashcards[currentFlashcardIndex].question;
+            }
+        }
+
+        showAnswerButton.addEventListener("click", () => {
+            showAnswer = true;
+            displayFlashcard();
+        });
+
+        nextButton.addEventListener("click", () => {
+            currentFlashcardIndex = (currentFlashcardIndex + 1) % flashcards.length;
+            showAnswer = false;
+            displayFlashcard();
+        });
+
+        displayFlashcard();
+    </script>
+</body>
+</html>
